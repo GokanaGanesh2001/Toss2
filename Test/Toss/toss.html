@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GG Toss</title>
+  <link rel="stylesheet" href="toss.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <div id="main">
+    <h1>Welcome to GG Toss!</h1>
+    <div id="result">
+      <p id="dis_result"><i class="fa-solid fa-arrow-down"></i></p>
+    </div>
+    <button id="tossButton" onclick="tossCoin()">Toss Coin</button>
+    <h6>Designed by <i class="fa-solid fa-arrow-right"></i> @Ganesh_Gokana!</h6>
+  </div>
+
+  <!-- Popup HTML -->
+  <div id="popup">
+    <div id="popupContent">
+      <p id="popupResult">Result will be displayed here!</p>
+      <button id="popupClose" onclick="closePopup()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    function randomNumber() {
+      return Math.floor(Math.random() * 2);
+    }
+
+    function tossCoin() {
+      let result = randomNumber();
+      let resultElement = document.getElementById('dis_result');
+      let resultContainer = document.getElementById('result');
+      let button = document.getElementById('tossButton');
+      let popup = document.getElementById('popup');
+      let popupResult = document.getElementById('popupResult');
+
+      // Add 'clicked' class to button
+      button.classList.add('clicked');
+
+      // Add 'rotate' class to result container
+      resultContainer.classList.add('rotate');
+
+      // Remove 'rotate' class after animation duration
+      setTimeout(() => {
+        resultContainer.classList.remove('rotate');
+
+        // Update the result text and colors
+        if (result === 1) {
+          resultElement.textContent = 'Heads';
+          resultContainer.style.backgroundColor = 'Green';
+          resultContainer.style.color = '#fff';
+          popupResult.textContent = 'Heads';
+        } else {
+          resultElement.textContent = 'Tails';
+          resultContainer.style.backgroundColor = 'red';
+          resultContainer.style.color = '#fff';
+          popupResult.textContent = 'Tails';
+        }
+
+        // Show the popup
+        popup.style.display = 'flex';
+      }, 600); // Match duration with CSS animation time
+    }
+
+    function closePopup() {
+      let popup = document.getElementById('popup');
+      popup.style.display = 'none'; // Hide the popup
+    }
+  </script>
+</body>
+</html>
